@@ -1,6 +1,6 @@
 [APU]
 apu = "any"                                       	# Audio system. Use: [any, nop, sdl, xaudio2]
-apu_max_queued_frames = 5                        	# Allows changing max buffered audio frames to reduce audio delay. Minimum is 16.
+apu_max_queued_frames = 16                        	# Allows changing max buffered audio frames to reduce audio delay. Minimum is 16.
 ffmpeg_verbose = false                            	# Verbose FFmpeg output (debug and above)
 mute = false                                      	# Mutes all audio output.
 
@@ -179,14 +179,14 @@ depth_transfer_not_equal_test = true              	# When transferring data betw
                                                   	# Settings this to true may make transfer round trips more friendly to depth compression depending on how the GPU implements it (as arbitrary depth output may result in it being disabled completely), which is beneficial to subsequent rendering, while setting this to false may reduce bandwidth usage during transfers as the previous depth won't need to be read.
 
 disassemble_pm4 = false                           	# Only does anything in debug builds, if set will disassemble and log all PM4 packets sent to the CP.
-draw_resolution_scale_x = 2                       	# Integer pixel width scale used for scaling the rendering resolution opaquely to the game.
+draw_resolution_scale_x = 1                       	# Integer pixel width scale used for scaling the rendering resolution opaquely to the game.
                                                   	# 1, 2 and 3 may be supported, but support of anything above 1 depends on the device properties, such as whether it supports sparse binding / tiled resources, the number of virtual address bits per resource, and other factors.
                                                   	# Various effects and parts of game rendering pipelines may work incorrectly as pixels become ambiguous from the game's perspective and because half-pixel offset (which normally doesn't affect coverage when MSAA isn't used) becomes full-pixel.
 
-draw_resolution_scale_y = 2                       	# Integer pixel width scale used for scaling the rendering resolution opaquely to the game.
+draw_resolution_scale_y = 1                       	# Integer pixel width scale used for scaling the rendering resolution opaquely to the game.
                                                   	# See draw_resolution_scale_x for more information.
 
-draw_resolution_scaled_texture_offsets = true     	# Apply offsets from texture fetch instructions taking resolution scale into account for render-to-texture, for more correct shadow filtering, bloom, etc., in some cases.
+draw_resolution_scaled_texture_offsets = false     	# Apply offsets from texture fetch instructions taking resolution scale into account for render-to-texture, for more correct shadow filtering, bloom, etc., in some cases.
 dump_shaders = ""                                 	# For shader debugging, path to dump GPU shaders to as they are compiled.
 dxbc_source_map = false                           	# Disassemble Xenos instructions as comments in the resulting DXBC for debugging.
 dxbc_switch = true                                	# Use switch rather than if for flow control. Turning this off or on may improve stability, though this heavily depends on the driver - on AMD, it's recommended to have this set to true, as some titles appear to crash when if is used for flow control (possibly the shader compiler tries to flatten them). On Intel HD Graphics, this is ignored because of a crash with the switch instruction.
